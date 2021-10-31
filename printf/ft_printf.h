@@ -8,7 +8,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-typedef struct s_list
+typedef struct s_flags
 {
 	char	type;
 	int		width;

@@ -6,7 +6,7 @@
 #include "../printf/ft_printf.h"
 #include "../libft/libft.h"
 
-/* void my_handler(int signum, siginfo_t *pid, void *context)
+void my_handler(int signum, siginfo_t *pid, void *context)
 {
 	int	i;
 
@@ -16,13 +16,13 @@
 	i = ft_printf("Signum is %d\n", signum);
 	i = ft_printf("It's PID is %u\n", pid->si_pid);
 	ft_putnbr_fd(i, 1);
-} */
+}
 
 int main(void)
 {
 	struct sigaction sigac;
-	/* sigset_t	set;
-	siginfo_t	pid; */
+	sigset_t	set;
+	siginfo_t	pid;
 
 	memset(&sigac, 0, sizeof(sigac));
 	ft_printf("PID is %i\n", getpid());

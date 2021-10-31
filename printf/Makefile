@@ -1,8 +1,10 @@
 LIBFT = -L libft -lft
 
-LIBFT_C = ./libft/*.c
+LIBFT_C = libft/*.c
 
-LIBFT_A = ./libft/libft.a
+LIBFT_A = libft/libft.a
+
+LIBFT_H = libft/libft.h
 
 NAME = libftprintf.a
 	
@@ -32,7 +34,7 @@ AR	= ar rc
 
 CFLAGS 	= -Wall -Wextra -Werror
 
-LIBA = libft.a
+LIBA_PF = libft.a
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
@@ -41,17 +43,15 @@ all: ${NAME}
 
 compile_libft: ${LIBFT_A}
 
-${LIBFT_A}:
-			cd ./libft; \
+${LIBFT_A}: ${LIBFT_C} ${LIBFT_H}
+			cd libft/; \
 			make; \
-			cp ${LIBA} ../; \
+			mv ${LIBA_PF} ../; \
 			make clean; \
-			cd ..;
-			mv ${LIBA} ${NAME}
+			cd ..
 	
 ${NAME}:	${LIBFT_A} ${OBJS} ${HEADER}
 			${AR} ${NAME} ${OBJS}
-
 
 clean:
 		${RM} ${OBJS}

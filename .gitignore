@@ -1,2 +1,3 @@
 .DS-Store
 *.o
+/practice/main.c
