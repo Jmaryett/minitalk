@@ -1,23 +1,23 @@
 #include "client.h"
 #include "server.h"
 
-static void	converting_to_bits(char c, int pid)
+void	converting_to_bits(char c, int pid)
 {
 	int	i;
 
-	i = 0;
-	while(i)
+	i = 128;
+	while(i > 0)
 	{
-		if (c & i == 0)
-			kill(pid, SIGUSR2);
-		else
+		if (c & i != 0)
 			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
 		i /= 2;
 	}
 	usleep(100);
 }
 
-static void	send_str(int pid, char *s)
+void	send_str(int pid, char *s)
 {
 	int	i;
 
@@ -27,6 +27,7 @@ static void	send_str(int pid, char *s)
 		converting_to_bits(s[i], pid);
 		i++;
 	}
+	return ;
 	//converting_to_bits(0, pid);
 }
 
@@ -42,7 +43,7 @@ int	main(int argc, char **argv)
 {
 	//struct sigaction	sigac;
 
-/* 	sigac.sa_flags = SA_SIGINFO;
+/*  	sigac.sa_flags = SA_SIGINFO;
 	sigac.sa_sigaction = ft_handler;
 	if (sigaction(SIGUSR1, &sigac, NULL) == -1 ||
 		sigaction(SIGUSR2, &sigac, NULL) == -1)
@@ -50,4 +51,5 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		errors("Wrong arguments");
 	send_str(atoi(argv[1]), argv[2]);
+	return (0);
 }
