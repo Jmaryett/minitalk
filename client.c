@@ -1,5 +1,4 @@
 #include "client.h"
-#include "server.h"
 
 void	converting_to_bits(char c, int pid)
 {
@@ -8,13 +7,15 @@ void	converting_to_bits(char c, int pid)
 	i = 128;
 	while(i > 0)
 	{
-		if (c & i != 0)
+		if (c & i)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
+		ft_putstr_fd("Sent 1 bit\n", 1);
 		i /= 2;
 	}
 	usleep(100);
+	//return ;
 }
 
 void	send_str(int pid, char *s)

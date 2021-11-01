@@ -1,5 +1,4 @@
 #include "server.h"
-#include "client.h"
 
 void	ft_handler(int signum, siginfo_t *sig, void *context)
 {
@@ -7,6 +6,7 @@ void	ft_handler(int signum, siginfo_t *sig, void *context)
 	static int	power = 0;
 
 	ft_putnbr_fd(signum, 1);
+	write(1, "\n", 1);
 	if (signum == SIGUSR1)
 	{
 		symb += 128 >> power;

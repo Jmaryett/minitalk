@@ -1,7 +1,8 @@
 NAME_CL = client
 
-HEADER = server.h \
-		client.h
+HEADER_SV = server.h
+		
+HEADER_CL = client.h
 
 NAME_SV = server
 
@@ -38,11 +39,11 @@ RM	= rm -f
 
 all: ${NAME_CL} ${NAME_SV}
 
-${NAME_CL}: ${OBJS_CL} ${HEADER} ${LIBA} ${LIBA_PF}
-		${CC} ${NAME_CL} ${OBJS_CL} ${LIBA} ${LIBA_PF}
+${NAME_CL}: ${OBJS_CL} ${HEADER_CL} ${LIBA}
+		${CC} ${NAME_CL} ${OBJS_CL} ${LIBA}
 
-${NAME_SV}: ${OBJS_SV} ${HEADER} ${LIBA} ${LIBA_PF}
-		${CC} ${NAME_SV} ${OBJS_SV} ${LIBA} ${LIBA_PF}
+${NAME_SV}: ${OBJS_SV} ${HEADER_SV} ${LIBA}
+		${CC} ${NAME_SV} ${OBJS_SV} ${LIBA}
 
 ${LIBA}: ${LIBA_C} ${LIBA_H}
 		cd ./libft; \

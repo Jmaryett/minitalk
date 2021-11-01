@@ -1,5 +1,4 @@
-#include "client.h"
-#include "server.h"
+#include "./libft/libft.h"
 
 void	errors(char *s)
 {
