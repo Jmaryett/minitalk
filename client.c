@@ -7,19 +7,21 @@ void	converting_to_bits(char c, int pid)
 	i = 128;
 	while(i >= 1)
 	{
-		if (c & i)
+		if (i & c)
 		{
-			kill(pid, SIGUSR1);
+			if (kill(pid, SIGUSR1) == -1)
+				errors("Error signal!");
 			ft_putnbr_fd(1, 1);
 		}
 		else
 		{
-			kill(pid, SIGUSR2);
+			if (kill(pid, SIGUSR2) == -1)
+				errors("Error signal!");
 			ft_putnbr_fd(0, 1);
 		}
 		i /= 2;
 	}
-	usleep(1000);
+	usleep(100);
 }
 
 void	send_str(int pid, char *s)

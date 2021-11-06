@@ -7,16 +7,17 @@ static void	ft_putchar(char c)
 
 void	ft_handler(int signum, siginfo_t *sig, void *context)
 {
-	static int	symb = 0;
+	static char	symb = NULL;
 	static int	power = 0;
 
- 	//ft_putnbr_fd(signum, 1);
+	ft_putnbr_fd(signum, 1);
+	write (1, "\n", 1);
 	if (signum == SIGUSR1)
 		symb += (128 >> power);
 	power += 1;
 	if (power == 8)
 	{
-		ft_putchar((char)symb);
+		ft_putchar(symb);
 		power = 0;
 		symb = 0;
 	}
@@ -37,7 +38,7 @@ int	main(int argc, char **argv)
 	if (sigaction(SIGUSR1, &sigac, 0) == -1)
 		errors("Error in sigaction");
 	if (sigaction(SIGUSR2, &sigac, 0) == -1)
-		errors("Error in sigaction");
+		errors("Error in sigaction!");
 	while (1)
 		pause();
 	return (0);
