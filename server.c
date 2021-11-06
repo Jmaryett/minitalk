@@ -1,22 +1,22 @@
 #include "server.h"
 
+static void	ft_putchar(char c)
+{
+	write (1, &c, 1);
+}
+
 void	ft_handler(int signum, siginfo_t *sig, void *context)
 {
 	static int	symb = 0;
 	static int	power = 0;
 
-	ft_putnbr_fd(signum, 1);
-	write(1, "\n", 1);
+ 	//ft_putnbr_fd(signum, 1);
 	if (signum == SIGUSR1)
-	{
-		symb += 128 >> power;
-		//ft_putnbr_fd(128>>power, 1);
-		//write(1, "\n", 1);
-	}
+		symb += (128 >> power);
 	power += 1;
 	if (power == 8)
 	{
-		ft_putchar_fd((char)symb, 1);
+		ft_putchar((char)symb);
 		power = 0;
 		symb = 0;
 	}

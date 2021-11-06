@@ -6,12 +6,6 @@ HEADER_CL = client.h
 
 NAME_SV = server
 
-#LIBA_PF = libftprintf.a
-
-#LIBA_PF_C = ./printf/*.c
-
-#LIBA_PF_H = ./printf/ft_printf.h
-
 LIBA = libft.a
 
 LIBA_C = ./libft/*.c
@@ -39,12 +33,6 @@ RM	= rm -f
 
 all: ${NAME_CL} ${NAME_SV}
 
-${NAME_CL}: ${OBJS_CL} ${HEADER_CL} ${LIBA}
-		${CC} ${NAME_CL} ${OBJS_CL} ${LIBA}
-
-${NAME_SV}: ${OBJS_SV} ${HEADER_SV} ${LIBA}
-		${CC} ${NAME_SV} ${OBJS_SV} ${LIBA}
-
 ${LIBA}: ${LIBA_C} ${LIBA_H}
 		cd ./libft; \
 		make; \
@@ -52,18 +40,17 @@ ${LIBA}: ${LIBA_C} ${LIBA_H}
 		make clean; \
 		cd ..
 
-#${LIBA_PF}: ${LIBA_PF_C} ${LIBA_PF_H}
-#			cd ./printf; \
-			make; \
-			mv ${LIBA_PF} ../; \
-			make clean; \
-			cd ..
+${NAME_CL}: ${OBJS_CL} ${HEADER_CL} ${LIBA}
+		${CC} ${NAME_CL} ${OBJS_CL} ${LIBA}
+
+${NAME_SV}: ${OBJS_SV} ${HEADER_SV} ${LIBA}
+		${CC} ${NAME_SV} ${OBJS_SV} ${LIBA}
 
 clean:
 	${RM} ${OBJS_CL} ${OBJS_SV}
 
 fclean: clean
-		${RM} ${NAME_CL} ${NAME_SV} ${LIBA} ${LIBA_PF}
+		${RM} ${NAME_CL} ${NAME_SV} ${LIBA}
 
 re:	fclean all
 

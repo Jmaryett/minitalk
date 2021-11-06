@@ -5,17 +5,21 @@ void	converting_to_bits(char c, int pid)
 	int	i;
 
 	i = 128;
-	while(i > 0)
+	while(i >= 1)
 	{
 		if (c & i)
+		{
 			kill(pid, SIGUSR1);
+			ft_putnbr_fd(1, 1);
+		}
 		else
+		{
 			kill(pid, SIGUSR2);
-		ft_putstr_fd("Sent 1 bit\n", 1);
+			ft_putnbr_fd(0, 1);
+		}
 		i /= 2;
 	}
-	usleep(100);
-	//return ;
+	usleep(1000);
 }
 
 void	send_str(int pid, char *s)
@@ -26,10 +30,10 @@ void	send_str(int pid, char *s)
 	while (s[i])
 	{
 		converting_to_bits(s[i], pid);
+		write (1, "\n", 1);
 		i++;
 	}
 	return ;
-	//converting_to_bits(0, pid);
 }
 
 /* void	ft_handler(int signum, siginfo_t *siginfo, void *context)
@@ -37,20 +41,21 @@ void	send_str(int pid, char *s)
 	(void)context;
 	(void)siginfo;
 	(void)signum;
-	ft_printf("Signal recieved\n");
+	ft_putstr_fd("Signal recieved\n", 1);
 } */
 
 int	main(int argc, char **argv)
 {
-	//struct sigaction	sigac;
+/* 	struct sigaction	sigac;
 
-/*  	sigac.sa_flags = SA_SIGINFO;
+  	sigac.sa_flags = SA_SIGINFO;
 	sigac.sa_sigaction = ft_handler;
-	if (sigaction(SIGUSR1, &sigac, NULL) == -1 ||
-		sigaction(SIGUSR2, &sigac, NULL) == -1)
+	if (sigaction(SIGUSR2, &sigac, NULL) == -1)
 		errors("Error in sigaction"); */
 	if (argc != 3)
 		errors("Wrong arguments");
 	send_str(atoi(argv[1]), argv[2]);
+/* 	while (1)
+		pause (); */
 	return (0);
 }
