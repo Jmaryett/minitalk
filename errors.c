@@ -1,9 +1,15 @@
-#include "./libft/libft.h"
-#include "server.h"
 #include "client.h"
+#include "server.h"
 
 void	errors(char *s)
 {
-	ft_putstr_fd(s, 1);
-	exit (1);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	exit (0);
 }

@@ -14,13 +14,11 @@ LIBA_H = ./libft/libft.h
 
 CFLAGS = -Wall -Wextra -Werror
 
-CC = gcc -g -o
+CC = gcc
 
-SRCS_CL = client.c \
-		errors.c
+SRCS_CL = client.c
 
-SRCS_SV = server.c \
-		errors.c
+SRCS_SV = server.c 
 
 OBJS_CL = ${SRCS_CL:.c=.o}
 
@@ -41,10 +39,10 @@ ${LIBA}: ${LIBA_C} ${LIBA_H}
 		cd ..
 
 ${NAME_CL}: ${OBJS_CL} ${HEADER_CL} ${LIBA}
-		${CC} ${NAME_CL} ${OBJS_CL} ${LIBA}
+		${CC} ${CFLAGS} -o ${NAME_CL} ${OBJS_CL} errors.c ${LIBA}
 
 ${NAME_SV}: ${OBJS_SV} ${HEADER_SV} ${LIBA}
-		${CC} ${NAME_SV} ${OBJS_SV} ${LIBA}
+		${CC} ${CFLAGS} -o ${NAME_SV} ${OBJS_SV} errors.c ${LIBA}
 
 clean:
 	${RM} ${OBJS_CL} ${OBJS_SV}
