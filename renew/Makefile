@@ -1,6 +1,6 @@
 NAME_CL = client
 
-HEADER = minitalk.h
+HEADER = ../renew/minitalk.h
 
 NAME_SV = server
 
@@ -14,11 +14,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRCS_CL = client.c
+SRCS_CL = ../renew/client.c
 
-SRCS_SV = server.c 
+SRCS_SV = ../renew/server.c 
 
-UTILS = utils.c
+UTILS = ../renew/utils.c
 
 OBJS_CL = ${SRCS_CL:.c=.o}
 
@@ -47,7 +47,7 @@ ${NAME_SV}: ${OBJS_SV} ${OBJS_UT} ${HEADER}
 		${CC} ${CFLAGS} -o ${NAME_SV} ${OBJS_SV} ${OBJS_UT}
 
 clean:
-	${RM} ${OBJS_CL} ${OBJS_SV}
+	${RM} ${OBJS_CL} ${OBJS_SV} ${OBJS_UT}
 
 fclean: clean
 		${RM} ${NAME_CL} ${NAME_SV}

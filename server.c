@@ -49,28 +49,27 @@ int	main(int argc, char **argv)
 	return (0);
 } */
 
-void	my_handler(int signum, siginfo_t *siginfo, void *unused)
+void	sv_handler(int signum, siginfo_t *siginfo, void *unused)
 {
 	static int	ascii = 0;
 	static int	power = 0;
 
 	(void)unused;
+	(void)siginfo;
+	// char	c = (unsigned char)signum;
+	// write(1, &c, 1), write(1, "\n", 1);
+	// ft_putnbr(signum);
 	if (signum == SIGUSR1)
-		ascii += 128 >> power;
+		ascii += (128 >> power);
 	power += 1;
-	if (power == 7)
+	if (power == 8)
 	{
 		ft_putchar(ascii);
 		power = 0;
 		ascii = 0;
-		if (kill(siginfo->si_pid, SIGUSR1) == -1)
-			errors("Error in returned signal\n");
 	}
-	else 
-	{
-		if (kill(siginfo->si_pid, SIGUSR2) == -1)
-			errors("Error in returned signal\n");
-	}
+	/* if (kill(siginfo->si_pid, SIGUSR2) == -1)
+		errors("Error in returning signal!\n"); */
 }
 
 int	main(int argc, char **argv)
@@ -84,8 +83,7 @@ int	main(int argc, char **argv)
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
 	sigac.sa_flags = SA_SIGINFO;
-	sigemptyset(&sigac.sa_mask);
-	sigac.sa_sigaction = my_handler;
+	sigac.sa_sigaction = sv_handler;
 	if ((sigaction(SIGUSR1, &sigac, 0)) == -1)
 		errors("Error sigaction\n");
 	if ((sigaction(SIGUSR2, &sigac, 0)) == -1)

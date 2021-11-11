@@ -3,13 +3,14 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/cpp",
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "linux-gcc-x64"
+            "intelliSenseMode": "macos-gcc-x64"
         }
     ],
     "version": 4

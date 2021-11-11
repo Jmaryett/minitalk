@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../printf/ft_printf.h"
-#include "../libft/libft.h"
 
 void my_handler(int signum, siginfo_t *pid, void *context)
 {
