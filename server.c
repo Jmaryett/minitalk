@@ -16,7 +16,7 @@ void	sv_handler(int signum, siginfo_t *siginfo, void *unused)
 		ascii = 0;
 	}
 	if (siginfo->si_pid == 0)
-		errors("Server didn't get client's PID or str is over!\n");
+		errors("\nServer didn't get client's PID or str is over!\n");
 	if (kill(siginfo->si_pid, SIGUSR2) == -1)
 		errors("Error in returning signal!\n");
 }
