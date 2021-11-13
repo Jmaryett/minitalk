@@ -16,7 +16,7 @@ void	sv_handler(int signum, siginfo_t *siginfo, void *unused)
 		ascii = 0;
 	}
 	if (siginfo->si_pid == 0)
-		errors("Server didn't get client's PID\n");
+		errors("Server didn't get client's PID or str is over!\n");
 	if (kill(siginfo->si_pid, SIGUSR2) == -1)
 		errors("Error in returning signal!\n");
 }
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	write(1, "Server started!\nPID: ", 21);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
-	sigemptyset(&sigac.sa_mask);
+	//sigemptyset(&sigac.sa_mask);
 	//sigaddset(&sigac.sa_mask, SIGINT);
 	//sigaddset(&sigac.sa_mask, SIGQUIT);
 	sigac.sa_flags = SA_SIGINFO;
