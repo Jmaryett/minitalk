@@ -54,4 +54,7 @@ fclean: clean
 
 re:	fclean all
 
+norm:
+	norminette ${SRCS_CL} ${SRCS_SV} ${UTILS} ${HEADER}
+
 .PHONY: all re clean fclean 

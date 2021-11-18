@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmaryett <jmaryett@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/18 17:41:03 by jmaryett          #+#    #+#             */
+/*   Updated: 2021/11/18 19:55:42 by jmaryett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 void	sv_handler(int signum, siginfo_t *siginfo, void *unused)
@@ -15,8 +27,8 @@ void	sv_handler(int signum, siginfo_t *siginfo, void *unused)
 		power = 0;
 		ascii = 0;
 	}
-	if (siginfo->si_pid == 0)
-		errors("\nServer didn't get client's PID or str is over!\n");
+	if (siginfo->si_pid <= 0)
+		errors("\nServer didn't get client's PID!\n");
 	if (kill(siginfo->si_pid, SIGUSR2) == -1)
 		errors("Error in returning signal!\n");
 }
@@ -31,9 +43,6 @@ int	main(int argc, char **argv)
 	write(1, "Server started!\nPID: ", 21);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
-	//sigemptyset(&sigac.sa_mask);
-	//sigaddset(&sigac.sa_mask, SIGINT);
-	//sigaddset(&sigac.sa_mask, SIGQUIT);
 	sigac.sa_flags = SA_SIGINFO;
 	sigac.sa_sigaction = sv_handler;
 	if ((sigaction(SIGUSR1, &sigac, 0)) == -1)
